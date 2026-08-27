@@ -5,7 +5,7 @@ import './App.css';
 
 function App() {
 
-  const baseUrl = "https://build-ecom-api.vercel.app" 
+  const baseUrl = "https://build-ecom-api.vercel.app"
   const [allProducts, setAllProducts] = useState([]);
 
   const getAllProducts = async () => {
@@ -25,6 +25,40 @@ function App() {
   useEffect(() => {
     getAllProducts()
   }, [])
+
+  const deleteProduct = async (id) => {
+    try {
+      await axios.delete(`${baseUrl}/product/${id}`);
+      getAllProducts();
+    } catch (error) {
+      console.log("Delete Error:", error);
+    }
+  };
+
+  const editProduct = async (product) => {
+    const title = prompt("Enter new title", product.title);
+    const price = prompt("Enter new price", product.price);
+    const description = prompt("Enter new description", product.description);
+    const image = prompt("Enter new image URL", product.image);
+
+    if (!title || !price || !description || !image) {
+      return;
+    }
+
+    try {
+      await axios.put(`${baseUrl}/product/${product.id}`, {
+        title,
+        price,
+        description,
+        image
+      });
+
+      getAllProducts();
+    } catch (error) {
+      console.log("Edit Error:", error);
+    }
+  };
+
 
   const formik = useFormik({
     initialValues: {
@@ -110,8 +144,10 @@ function App() {
         <button type="submit">Submit</button>
       </form>
 
-     <div className="products-container">
+      <div className="products-container">
+
   {allProducts.map((eachProduct) => (
+
     <div className="product-card" key={eachProduct.id}>
 
       <img
@@ -121,19 +157,37 @@ function App() {
       />
 
       <div className="product-info">
+
         <h2>{eachProduct.title}</h2>
 
         <h3>Rs. {eachProduct.price}</h3>
 
         <p>{eachProduct.description}</p>
 
-        <button className="buy-btn">
-          View Product
-        </button>
+        <div className="product-actions">
+
+          <button
+            className="edit-btn"
+            onClick={() => editProduct(eachProduct)}
+          >
+            Edit
+          </button>
+
+          <button
+            className="delete-btn"
+            onClick={() => deleteProduct(eachProduct.id)}
+          >
+            Delete
+          </button>
+
+        </div>
+
       </div>
 
     </div>
+
   ))}
+
 </div>
     </div>
   );
