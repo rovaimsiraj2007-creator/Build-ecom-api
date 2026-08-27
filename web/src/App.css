@@ -1,154 +1,361 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f4f4;
+  color: #111;
 }
+
+/* =========================
+   MAIN APP
+========================= */
 
 .App {
   min-height: 100vh;
-  padding: 40px 60px;
+  padding: 50px 40px;
 }
 
-/* Form */
+
+/* =========================
+   FORM
+========================= */
 
 form {
+  width: 100%;
   max-width: 600px;
   margin: 0 auto 50px;
   padding: 30px;
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+
+  animation: formAppear 0.6s ease;
 }
 
 form label {
   display: block;
-  font-size: 16px;
+  margin-bottom: 18px;
+  font-size: 15px;
   font-weight: 600;
-  margin-bottom: 8px;
 }
 
 form input,
 form textarea {
   width: 100%;
   margin-top: 8px;
-  padding: 12px 14px;
+  padding: 13px 15px;
+
   border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 15px;
+  border-radius: 9px;
+
   outline: none;
+  font-size: 15px;
+  font-family: inherit;
+
+  transition: all 0.25s ease;
 }
 
 form input:focus,
 form textarea:focus {
-  border-color: #333;
+  border-color: #111;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
 }
 
 form textarea {
-  min-height: 100px;
+  min-height: 110px;
   resize: vertical;
 }
 
-form button {
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+
+form button[type="submit"] {
   width: 100%;
-  padding: 13px;
-  margin-top: 10px;
+  padding: 14px;
+
   border: none;
-  border-radius: 8px;
-  background: #111;
-  color: white;
+  border-radius: 9px;
+
+  background: #000;
+  color: #fff;
+
   font-size: 16px;
   font-weight: bold;
+
   cursor: pointer;
+
+  transition: all 0.25s ease;
 }
 
-form button:hover {
-  background: #333;
+form button[type="submit"]:hover {
+  background: #222;
+  transform: translateY(-3px);
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.2);
+}
+
+form button[type="submit"]:active {
+  transform: translateY(0);
 }
 
 
-/* Products */
+/* =========================
+   PRODUCTS CONTAINER
+========================= */
 
 .products-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 25px;
-  max-width: 1200px;
-  margin: auto;
+
+  gap: 28px;
 }
 
+
+/* =========================
+   PRODUCT CARD
+========================= */
+
 .product-card {
-  background: white;
-  border-radius: 15px;
+  background: #fff;
+
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-  transition: 0.3s;
+
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+
+  transition: all 0.3s ease;
+
+  animation: cardAppear 0.5s ease;
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  transform: translateY(-8px);
+
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
+
+
+/* =========================
+   PRODUCT IMAGE
+========================= */
 
 .product-image {
   width: 100%;
   height: 240px;
+
+  display: block;
+
   object-fit: contain;
+
   padding: 20px;
+
   background: #fafafa;
+
+  transition: transform 0.35s ease;
 }
 
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+
+/* =========================
+   PRODUCT INFORMATION
+========================= */
+
 .product-info {
-  padding: 20px;
+  padding: 22px;
 }
 
 .product-info h2 {
-  margin: 0 0 10px;
+  margin-bottom: 10px;
+
   font-size: 21px;
+  font-weight: 700;
+
+  color: #111;
 }
 
 .product-info h3 {
-  margin: 0 0 10px;
+  margin-bottom: 12px;
+
   font-size: 19px;
+
+  color: #111;
 }
 
 .product-info p {
+  margin-bottom: 18px;
+
   color: #666;
-  line-height: 1.5;
+
+  font-size: 14px;
+  line-height: 1.6;
+
   min-height: 45px;
 }
 
-.buy-btn {
-  width: 100%;
-  padding: 11px;
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.product-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.edit-btn,
+.delete-btn {
+  flex: 1;
+
+  padding: 11px 15px;
+
   border: none;
   border-radius: 8px;
-  background: #111;
+
   color: white;
-  cursor: pointer;
+
+  font-size: 14px;
   font-weight: bold;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
 }
 
-.buy-btn:hover {
-  background: #333;
+
+/* =========================
+   EDIT BUTTON - BLACK
+========================= */
+
+.edit-btn {
+  background: #000;
+}
+
+.edit-btn:hover {
+  background: #222;
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.25);
+}
+
+.edit-btn:active {
+  transform: translateY(0);
 }
 
 
-/* Mobile */
+/* =========================
+   DELETE BUTTON - RED
+========================= */
 
-@media (max-width: 600px) {
+.delete-btn {
+  background: #e53935;
+}
+
+.delete-btn:hover {
+  background: #c62828;
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 7px 18px rgba(229, 57, 53, 0.3);
+}
+
+.delete-btn:active {
+  transform: translateY(0);
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes formAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
   .App {
-    padding: 20px;
+    padding: 25px 15px;
   }
 
   form {
-    padding: 20px;
+    padding: 22px;
+    margin-bottom: 35px;
   }
 
   .products-container {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .product-image {
+    height: 220px;
+  }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+  .App {
+    padding: 20px 10px;
+  }
+
+  form {
+    padding: 18px;
+  }
+
+  .product-info {
+    padding: 18px;
+  }
+
+  .product-actions {
+    gap: 8px;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    padding: 10px;
   }
 }
