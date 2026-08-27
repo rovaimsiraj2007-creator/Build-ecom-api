@@ -1,19 +1,13 @@
 import express from "express";
-// import cors from "cors"
+import cors from "cors"
 import path from "path"
 
 const app = express();
 const PORT = 5000;
 
-let products = [{
-  "id": 123456,
-  "title": "iPhone",
-  "price": 100000,
-  "description": "Apple Phone",
-  "image": "iphone.jpg"
-}];
+let products = [];
 
-// app.use(cors());
+app.use(cors());
 app.use(express.json());
 
 app.post('/add-product', (req, res) => {
@@ -23,7 +17,7 @@ app.post('/add-product', (req, res) => {
     return;
   }
 
-  products.push({ id: new Date().getTime(), ...products });
+  products.push({ id: new Date().getTime(), ...productBody });
   console.log(products)
   res.status(201).send({ status: "success", message: "Product Added Successfully" })
 })
@@ -77,6 +71,10 @@ app.delete('/product/:id', (req, res) => {
     res.status(200).send({ status: "success", message: "product deleted successfully" })
 })
 
+const __dirname = path.resolve();
+const __frontend = path.join(__dirname, './web/build')
+app.use('/', express.static(__frontend))
+app.use("/*splat", express.static(__frontend))
 
 app.listen(PORT, () => {
   console.log(`App is Running On Port ${PORT}`)
