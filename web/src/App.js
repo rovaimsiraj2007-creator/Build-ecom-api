@@ -5,8 +5,7 @@ import './App.css';
 
 function App() {
 
-  const baseUrl = "https://build-ecom-api.vercel.app" //https://ecom-test-backend.vercel.app
-
+  const baseUrl = "https://build-ecom-api.vercel.app" 
   const [allProducts, setAllProducts] = useState([]);
 
   const getAllProducts = async () => {
