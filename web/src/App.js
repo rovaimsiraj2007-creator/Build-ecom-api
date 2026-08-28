@@ -9,13 +9,8 @@ function App() {
   const [allProducts, setAllProducts] = useState([]);
 
   const getAllProducts = async () => {
-    // const apiReq = {
-    //   method: "get",
-    //   url: "/products"
-    // }
     try {
       const apiRes = await axios.get(`${baseUrl}/products`);
-      // console.log("apiRes", apiRes.data)
       setAllProducts(apiRes.data.products)
     } catch (error) {
       console.log("Error", error)
@@ -68,17 +63,7 @@ function App() {
       description: ''
     },
     onSubmit: async (values) => {
-      // console.log(values)
-      // const apiReq = {
-      //   method: "post",
-      //   url: "/product",
-      //   body:{
-      //     title: values.title,
-      //     price: values.price,
-      //     description: values.description,
-      //     image: values.productImage
-      //   }
-      // }
+
       try {
         await axios.post(`${baseUrl}/add-product`, {
           title: values.title,
@@ -86,7 +71,7 @@ function App() {
           description: values.description,
           image: values.productImage
         })
-        // console.log("apiRes", apiRes.data)
+
         getAllProducts()
       } catch (error) {
         console.log("Err", error)
@@ -114,7 +99,7 @@ function App() {
           Title:
           <input
             type="text"
-            placeholder="Mobile"
+            placeholder="Item Name"
             name="title"
             onChange={formik.handleChange}
             value={formik.values.title}
